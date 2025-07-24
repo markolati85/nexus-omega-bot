@@ -20,10 +20,8 @@ load_dotenv()
 
 class AICore:
     def __init__(self):
-        """Initialize AI Core with GPT-4o and dynamic volatility mode"""
+        """Initialize AI Core with GPT-4o"""
         self.client = None
-        self.volatility_mode = "dynamic"
-        self.confidence_range = {"min": 65, "max": 90}
         self.setup_openai()
     
     def setup_openai(self):
@@ -48,13 +46,13 @@ class AICore:
     
     def get_trade_decision(self, pair_data: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Get AI trading decision using GPT-4o with dynamic risk adjustment
+        Get AI trading decision using GPT-4o
         
         Args:
             pair_data (dict): Market data including price, RSI, trend, volatility
             
         Returns:
-            dict: Trading decision with direction, leverage, strategy, dynamic stops
+            dict: Trading decision with direction, leverage, strategy
         """
         
         if not self.client:
@@ -115,31 +113,24 @@ MARKET DATA:
 - Volume Ratio: {volume_ratio:.2f}x
 
 TRADING DECISION REQUIRED:
-Analyze this data and determine the optimal trading action with dynamic risk management.
+Analyze this data and determine the optimal trading action.
 
 Consider:
 1. Market momentum and trend direction
 2. Technical indicators (RSI, volume, volatility)
-3. Dynamic risk-reward ratio based on volatility
-4. Optimal leverage based on market conditions (1x-125x)
+3. Risk-reward ratio
+4. Optimal leverage based on market conditions
 5. Best strategy for current market state
-6. Dynamic stop loss based on volatility (0.5%-5.0%)
-7. Trailing stop opportunities (1.0%-3.0%)
-8. Long/short opportunities with margin/futures
 
 Respond with ONLY valid JSON in this exact format:
 {{
     "direction": "long" or "short" or "hold",
     "leverage": 1-125,
     "strategy": "trend" or "breakout" or "meanreversion" or "grid",
-    "confidence": 65-90,
+    "confidence": 0-100,
     "reasoning": "brief explanation of decision",
-    "stop_loss_pct": 0.5-5.0,
-    "trailing_stop_pct": 1.0-3.0,
-    "take_profit_pct": 1.0-8.0,
-    "trade_type": "spot" or "margin" or "futures",
-    "dynamic_risk": true/false,
-    "volatility_adjusted": true/false
+    "stop_loss_pct": 0.5-3.0,
+    "take_profit_pct": 1.0-8.0
 }}
 
 Base leverage recommendations:
@@ -153,23 +144,15 @@ Base leverage recommendations:
     def _validate_decision(self, decision: Dict[str, Any], pair_data: Dict[str, Any]) -> Dict[str, Any]:
         """Validate and sanitize AI decision"""
         
-        # Default safe values with dynamic risk management
-        volatility = pair_data.get('volatility', 1.0)
-        dynamic_confidence_min = self.confidence_range["min"]
-        dynamic_confidence_max = self.confidence_range["max"]
-        
+        # Default safe values
         validated = {
             "direction": decision.get("direction", "hold").lower(),
             "leverage": max(1, min(125, decision.get("leverage", 10))),
             "strategy": decision.get("strategy", "trend").lower(),
-            "confidence": max(dynamic_confidence_min, min(dynamic_confidence_max, decision.get("confidence", 70))),
+            "confidence": max(0, min(100, decision.get("confidence", 50))),
             "reasoning": decision.get("reasoning", "AI analysis complete"),
-            "stop_loss_pct": max(0.5, min(5.0, decision.get("stop_loss_pct", self._calculate_dynamic_stop(volatility)))),
-            "trailing_stop_pct": max(1.0, min(3.0, decision.get("trailing_stop_pct", 1.5))),
-            "take_profit_pct": max(1.0, min(8.0, decision.get("take_profit_pct", 4.0))),
-            "trade_type": decision.get("trade_type", "spot").lower(),
-            "dynamic_risk": decision.get("dynamic_risk", True),
-            "volatility_adjusted": decision.get("volatility_adjusted", True)
+            "stop_loss_pct": max(0.5, min(3.0, decision.get("stop_loss_pct", 2.0))),
+            "take_profit_pct": max(1.0, min(8.0, decision.get("take_profit_pct", 4.0)))
         }
         
         # Validate direction
@@ -180,24 +163,7 @@ Base leverage recommendations:
         if validated["strategy"] not in ["trend", "breakout", "meanreversion", "grid"]:
             validated["strategy"] = "trend"
         
-        # Validate trade type
-        if validated["trade_type"] not in ["spot", "margin", "futures"]:
-            validated["trade_type"] = "spot"
-        
         return validated
-    
-    def _calculate_dynamic_stop(self, volatility: float) -> float:
-        """Calculate dynamic stop loss based on volatility"""
-        base_stop = 2.0
-        
-        if volatility > 3.0:
-            return min(5.0, base_stop * 1.5)
-        elif volatility > 2.0:
-            return base_stop * 1.2
-        elif volatility < 1.0:
-            return max(0.5, base_stop * 0.8)
-        else:
-            return base_stop
     
     def _fallback_decision(self, pair_data: Dict[str, Any]) -> Dict[str, Any]:
         """Fallback decision when AI is unavailable"""
