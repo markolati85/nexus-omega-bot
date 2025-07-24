@@ -1,0 +1,51 @@
+NEXUS BOT SERBIAN SERVER FILES LIST
+==========================================
+
+All files are located in your current Replit project directory.
+Here's exactly what you need to download and upload to your Serbian server:
+
+CORE TRADING FILES:
+1. nexus_okx_pro_gpt4o.py         ✅ Main trading bot engine
+2. start_live_bot.py              ✅ Bot launcher script  
+3. launch_autonomous_okx_pro.py   ✅ Alternative launcher
+4. .env_okx                       ✅ Environment variables (API keys)
+
+AI & STRATEGY MODULES:
+5. ai_core_langchain.py           ✅ GPT-4o decision engine
+6. strategy_selector.py           ✅ Trading strategy selection
+7. futures_handler.py             ✅ Futures trading module
+8. margin_handler.py              ✅ Margin trading module
+9. auto_transfer_handler.py       ✅ Wallet management
+10. opportunity_shift_engine.py   ✅ Capital reallocation
+11. failsafe.py                   ✅ Risk management system
+
+CONFIGURATION FILES:
+12. config_autonomous.json        ✅ Bot configuration
+13. leverage_profile.json         ✅ Leverage settings
+14. failsafe_config.json          ✅ Safety parameters
+
+MONITORING TOOLS:
+15. monitor_bot_performance.py    ✅ Performance monitoring
+16. check_live_status.py          ✅ Status checker
+17. check_balance.py              ✅ Balance verification
+18. bot_assessment.py             ✅ Performance assessment
+
+DEPLOYMENT SCRIPTS:
+19. complete_deployment_commands.sh     ✅ One-click deployment
+20. deploy_to_serbian_server.py         ✅ Automated deployment
+21. SERBIAN_SERVER_DEPLOYMENT.md       ✅ Complete instructions
+
+HOW TO ACCESS FILES:
+1. All files are in your current Replit workspace
+2. Click on any file name in the left sidebar to view/edit
+3. Download files by right-clicking → "Download"
+4. Or use the deployment scripts for automatic upload
+
+QUICK DOWNLOAD METHOD:
+- Right-click each file in the Replit file explorer
+- Select "Download" to save to your computer
+- Then upload to Serbian server using the deployment commands
+
+AUTOMATED METHOD:
+- Run: ./complete_deployment_commands.sh
+- This will automatically upload all files to your Serbian server

@@ -1,0 +1,21 @@
+# Binance API Configuration for Serbian Server  
+BINANCE_API_KEY=JR6y3jckPRp9NZRgjhaHiuZDZJ1BaEXWcsCRqZnnoByjLOBTCCMpbeU2pH9uoUer
+BINANCE_API_SECRET=gY0HCjWELnpYqkeXuU4xNTDFsfTpkaorw3b3XVUXpQF2zP7rhbVitwMAkbrpSol7
+
+# Trading Bot Configuration
+POSITION_SIZE_PERCENT=5.0
+MAX_TRADE_USDT=100.0
+STOP_LOSS_PERCENT=2.0
+TAKE_PROFIT_PERCENT=3.0
+
+# Telegram Notifications
+TELEGRAM_BOT_TOKEN=demo_telegram_token
+TELEGRAM_CHAT_ID=demo_chat_id
+
+# Flask Configuration
+SESSION_SECRET=nexus-serbian-deployment-2025
+
+# Web Dashboard
+DASHBOARD_PASSWORD=nexus2025
+DASHBOARD_PORT=8080
+OPENAI_API_KEY=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

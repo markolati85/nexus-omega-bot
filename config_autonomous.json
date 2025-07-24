@@ -1,0 +1,59 @@
+{
+  "default_strategy": "auto",
+  "leverage_mode": "dynamic",
+  "risk": {
+    "max_daily_loss_pct": 4.5,
+    "max_trade_loss_pct": 1.2,
+    "max_consecutive_losses": 5,
+    "position_size_pct": 6.0,
+    "emergency_stop_loss_pct": 8.0
+  },
+  "pairs": [
+    "BTC/USDT", 
+    "ETH/USDT", 
+    "SOL/USDT", 
+    "LINK/USDT",
+    "AVAX/USDT",
+    "MATIC/USDT",
+    "DOGE/USDT", 
+    "XRP/USDT", 
+    "ADA/USDT", 
+    "DOT/USDT",
+    "ATOM/USDT",
+    "APT/USDT"
+  ],
+  "cycle_interval_sec": 60,
+  "confidence_threshold": 70,
+  "ai_settings": {
+    "model": "gpt-4o",
+    "temperature": 0.1,
+    "max_tokens": 500,
+    "enable_gpt4o": true
+  },
+  "trading_modes": {
+    "spot_enabled": true,
+    "margin_enabled": true,
+    "futures_enabled": true,
+    "auto_transfer": true
+  },
+  "optimization": {
+    "opportunity_shifting": true,
+    "wallet_optimization": true,
+    "emergency_consolidation": false,
+    "multicoin_parallel_trading": true,
+    "dynamic_stop_loss": true,
+    "trailing_stop": true,
+    "volatility_adjustment": true
+  },
+  "advanced_features": {
+    "stop_loss_pct": -3.0,
+    "trailing_stop_pct": 1.5,
+    "dynamic_risk_mode": true,
+    "confidence_range": [65, 90],
+    "volatility_mode": "dynamic",
+    "faster_cycles": true,
+    "multicoin_allocation": true,
+    "long_short_enabled": true,
+    "margin_futures_enabled": true
+  }
+}
