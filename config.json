@@ -1,0 +1,6 @@
+{
+  "pair": "BTC/USDT",
+  "cycle_interval": 60,
+  "position_size_pct": 50,
+  "confidence_threshold": 60
+}

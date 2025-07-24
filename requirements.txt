@@ -1,14 +1,4 @@
 ccxt
-torch
-ta-lib
-websocket-client
-flask
-requests
-beautifulsoup4
-vaderSentiment
-pandas
-numpy
-matplotlib
-scipy
-deap
 openai
+requests
+python-dotenv
